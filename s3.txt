@@ -1,0 +1,12 @@
+vmdk를 마운트해보았다.
+그리고 멀웨어들은 보통 자신의 서버를 자동으로 실행시키기 위해서 systemd 서비스에 등록한다.
+find ~/vmdk_mount/etc/systemd/system/ -type f
+find ~/vmdk_mount/lib/systemd/system/ -type f
+이 명령어를 통해 확인해보니
+
+/root/vmdk_mount/etc/systemd/system/webserver.service
+/root/vmdk_mount/etc/systemd/system/webcheck.service
+이 두개가 기본 서비스랑은 다른 서비스였다.
+
+둘다 cat해보니 webcheck에서 ExecStart로 webchecker라는 바이너리를 실행하길래 의심스러워서
+ExecStart=/usr/bin/webchecker을 주길래 whitehat2025{/usr/bin/webchecker}를 플래그로 제출했다.
